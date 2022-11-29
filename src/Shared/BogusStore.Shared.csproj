@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="FluentValidation" Version="10.4.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Authentication\" />
+	  <None Remove="Infrastructure\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Authentication\" />
+	  <Folder Include="Infrastructure\" />
+	</ItemGroup>
+</Project>

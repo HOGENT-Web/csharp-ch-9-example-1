@@ -1,0 +1,74 @@
+﻿<EditForm Model="@customer" OnValidSubmit="@CreateCustomerAsync">
+    <FluentValidationValidator />
+    <div class="field">
+        <label class="label">Voornaam</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Firstname" />
+            <ValidationMessage For="() => customer.Firstname" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Achternaam</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Lastname" />
+            <ValidationMessage For="() => customer.Lastname" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Email" />
+            <ValidationMessage For="() => customer.Email" />
+        </div>
+    </div>
+
+    <hr />
+
+    <label class="label">Address</label>
+    <div class="field">
+        <label class="label">Straat</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Address.Addressline1" />
+            <ValidationMessage For="() => customer.Address.Addressline1" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Bus</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Address.Addressline2" />
+            <ValidationMessage For="() => customer.Address.Addressline2" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Postcode</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Address.PostalCode" />
+            <ValidationMessage For="() => customer.Address.PostalCode" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Stad</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Address.City" />
+            <ValidationMessage For="() => customer.Address.City" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Land</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="customer.Address.Country" />
+            <ValidationMessage For="() => customer.Address.Country" />
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="button is-link is-fullwidth" type="submit">Toevoegen</button>
+        <a href="customer" class="button is-link is-light is-fullwidth">Annuleren</a>
+    </div>
+</EditForm>

@@ -1,0 +1,48 @@
+﻿@page "/tag"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = Roles.Administrator)]
+
+<div class="field has-addons">
+    <div class="control has-icons-left is-expanded">
+        <input class="input" type="search" placeholder="Zoeken..." value="@searchTerm" @onchange="SearchTermChanged">
+        <span class="icon is-left">
+            <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="control">
+        <button class="button is-primary" @onclick="ShowCreateForm">
+            <span class="icon">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span>Toevoegen</span>
+        </button>
+    </div>
+</div>
+
+
+
+<div class="table-container">
+    <table class="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Naam</th>
+                <th>Kleur</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (tags is not null)
+            {
+                @foreach (var tag in tags)
+                {
+                    <tr>
+                        <th>@tag.Id</th>
+                        <td>@tag.Name</td>
+                        <td>@tag.Color</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

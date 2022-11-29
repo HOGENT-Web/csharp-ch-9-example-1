@@ -1,0 +1,83 @@
+﻿@page "/customer/{id:int}"
+
+@if (customer is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="is-flex is-justify-content-space-between mb-3 ">
+        <div>
+            <a class="button is-white" href="customer">
+                <span class="icon is-small">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Terug</span>
+            </a>
+        </div>
+        <div>
+            <button class="button is-primary" @onclick="ShowEditForm">
+                <span class="icon is-small">
+                    <i class="fas fa-pen"></i>
+                </span>
+                <span>Wijzig</span>
+            </button>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Algemeen
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="columns">
+                        <div class="column">
+                            <p class="has-text-weight-bold">Voornaam</p>
+                            <p class="has-text-weight-bold">Achternaam</p>
+                            <p class="has-text-weight-bold">Email</p>
+                            <p class="has-text-weight-bold">Sinds</p>
+                            <p class="has-text-weight-bold">Gewijzigd</p>
+                        </div>
+                        <div class="column">
+                            <p>@customer.Firstname</p>
+                            <p>@customer.Lastname</p>
+                            <p><a href="mailto:@customer.Email">@customer.Email</a></p>
+                            <p>@customer.CreatedAt.ToLocalTime().ToLongDateString()</p>
+                            <p>@customer.UpdatedAt.ToLocalTime()</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Adres
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="columns">
+                        <div class="column">
+                            <p class="has-text-weight-bold">Straat</p>
+                            <p class="has-text-weight-bold">Bus</p>
+                            <p class="has-text-weight-bold">Postcode</p>
+                            <p class="has-text-weight-bold">Land</p>
+                        </div>
+                        <div class="column">
+                            <p>@customer.Address.Addressline1</p>
+                            <p>@customer.Address.Addressline2</p>
+                            <p>@customer.Address.PostalCode, @customer.Address.City</p>
+                            <p>@customer.Address.Country</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

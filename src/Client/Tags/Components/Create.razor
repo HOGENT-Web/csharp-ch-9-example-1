@@ -1,0 +1,23 @@
+﻿<EditForm Model="@tag" OnValidSubmit="@CreateTagAsync">
+    <FluentValidationValidator />
+    <div class="field">
+        <label class="label">Naam</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="tag.Name" />
+            <ValidationMessage For="() => tag.Name" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Kleur</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="tag.Color" />
+            <ValidationMessage For="() => tag.Color" />
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="button is-link is-fullwidth" type="submit">Toevoegen</button>
+        <a href="tag" class="button is-link is-light is-fullwidth">Annuleren</a>
+    </div>
+</EditForm>

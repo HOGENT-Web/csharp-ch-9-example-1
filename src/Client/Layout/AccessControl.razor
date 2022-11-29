@@ -1,0 +1,20 @@
+﻿
+<div class="navbar-item has-dropdown is-hoverable ">
+    <a class="navbar-link">
+        Login as
+    </a>
+
+    <div class="navbar-dropdown is-right">
+
+        @foreach (var claimsPrincipal in FakeAuthenticationProvider.ClaimsPrincipals)
+        {
+            <a class="navbar-item @IsActive(claimsPrincipal)" @onclick="_ => ChangePrincipal(claimsPrincipal)">
+                @claimsPrincipal.Identity?.Name
+            </a>
+        }
+    </div>
+
+</div>
+<a class="navbar-item">
+    @FakeAuthenticationProvider.Current.Identity?.Name
+</a>

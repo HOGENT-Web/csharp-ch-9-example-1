@@ -1,0 +1,68 @@
+﻿@page "/product/{Id:int}"
+<PageTitle>@product?.Name</PageTitle>
+
+@if (product is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="columns ">
+        <div class="column ">
+            <h1 class="title is-3">
+                @product.Name
+            </h1>
+            <p class="block has-text-gray is-size-5">@product.Price.ToString("C") <small>| @string.Join(',',product.Tags)</small></p>
+            <p class="block">@product.Description</p>
+            <div class="buttons is-centered">
+                <button @onclick="AddToCart" class="button is-primary is-medium is-fullwidth">
+                    <span class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                    <span>Bestellen</span>
+                </button>
+                <AuthorizeView Roles="@Roles.Administrator">
+                    <button class="button is-light is-medium is-fullwidth" @onclick="ShowEditForm">
+                        <span class="icon">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span>Wijzigen</span>
+                    </button>
+                    @if (isRequestingDelete)
+                    {
+
+                        <button class="button is-light is-medium is-fullwidth" @onclick="CancelDeleteRequest">
+                            <span class="icon">
+                                <i class="fas fa-times"></i>
+                            </span>
+                            <span>Verwijderen annuleren</span>
+                        </button>
+                        <button class="button is-danger is-medium is-fullwidth" @onclick="DeleteProductAsync">
+                            <span class="icon">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span>Verwijderen bevestigen</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="button is-light is-medium is-fullwidth" @onclick="RequestDelete">
+                            <span class="icon">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span>Verwijderen</span>
+                        </button>
+                    }
+                </AuthorizeView>
+            </div>
+        </div>
+
+        <div class="column has-text-centered">
+            <figure class="image is-inline-block  ">
+                <img src="@product.ImageUrl">
+            </figure>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,47 @@
+﻿@page "/product"
+<PageTitle>Producten</PageTitle>
+
+@if (products is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="columns">
+        <div class="column is-one-quarter">
+            <AuthorizeView Roles="@Roles.Administrator">
+                <div class="buttons">
+                    <button class="button is-primary is-fullwidth" @onclick="ShowCreateForm">
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>Toevoegen</span>
+                    </button>
+                </div>
+            </AuthorizeView>
+            <h1 class="title is-size-6 is-uppercase has-text-grey">Zoek een product</h1>
+            <ProductFilters Searchterm="@Searchterm" TagId="TagId" MaxPrice="MaxPrice" MinPrice="MinPrice" />
+        </div>
+        <div class="column">
+            @if (!products.Any())
+            {
+                <div class="notification">
+                    Geen producten gevonden met deze zoek criteria...
+                </div>
+            }
+            else
+            {
+                <div class="columns is-multiline">
+
+                    @foreach (var product in products)
+                    {
+                        <div class="column is-half">
+                            <ProductListItem Product="product" />
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
+
