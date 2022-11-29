@@ -15,6 +15,10 @@ public class FakeSeeder
 
     public void Seed()
     {
+        // Not a good idea in production.
+        dbContext.Database.EnsureDeleted();
+        dbContext.Database.EnsureCreated();
+
         SeedProducts();
         SeedTags();
         SeedCustomers();

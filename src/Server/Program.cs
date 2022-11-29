@@ -8,6 +8,8 @@ using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +30,13 @@ builder.Services.AddSwaggerGen(options =>
 }).AddFluentValidationRulesToSwagger();
 
 // Database
-builder.Services.AddDbContext<BogusDbContext>();
+builder.Services.AddDbContext<BogusDbContext>(options =>
+{
+    options.UseSqlServer
+    (
+        builder.Configuration.GetConnectionString("SqlServer")
+    );
+});
 
 // (Fake) Authentication
 builder.Services.AddAuthentication("Fake Authentication")
