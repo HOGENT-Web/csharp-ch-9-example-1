@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BogusStore.Persistence.Configurations.Customers;
 
-internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+internal class CustomerConfiguration : EntityConfiguration<Customer>
 {
-    public void Configure(EntityTypeBuilder<Customer> builder)
+    public override void Configure(EntityTypeBuilder<Customer> builder)
     {
+        base.Configure(builder);
         builder.OwnsOne(x => x.Email).Property(x => x.Value);
         builder.OwnsOne(x => x.Address, address =>
         {

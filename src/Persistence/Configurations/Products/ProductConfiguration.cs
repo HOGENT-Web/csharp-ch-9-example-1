@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BogusStore.Persistence.Configurations.Products;
 
-internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+internal class ProductConfiguration : EntityConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
+    public override void Configure(EntityTypeBuilder<Product> builder)
     {
+        base.Configure(builder);
         builder.OwnsOne(x => x.Price).Property(x => x.Value);
     }
 }
