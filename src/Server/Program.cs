@@ -42,6 +42,10 @@ builder.Services.AddDbContext<BogusDbContext>(options =>
 builder.Services.AddAuthentication("Fake Authentication")
                 .AddScheme<AuthenticationSchemeOptions, FakeAuthenticationHandler>("Fake Authentication", null);
 
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpContextAccessor>().HttpContext.User);
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
