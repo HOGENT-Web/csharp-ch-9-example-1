@@ -1,4 +1,5 @@
-﻿using BogusStore.Domain.Customers;
+﻿using System.Security.Claims;
+using BogusStore.Domain.Customers;
 using BogusStore.Domain.Products;
 using BogusStore.Persistence;
 using BogusStore.Shared.Customers;
@@ -10,14 +11,19 @@ namespace BogusStore.Services.Customers;
 public class CustomerService : ICustomerService
 {
     private readonly BogusDbContext dbContext;
+    private readonly ClaimsPrincipal claimsPrincipal = default!;
 
-    public CustomerService(BogusDbContext dbContext)
+    public CustomerService(BogusDbContext dbContext, ClaimsPrincipal claimsPrincipal)
     {
         this.dbContext = dbContext;
+        this.claimsPrincipal = claimsPrincipal;
     }
 
     public async Task<CustomerResult.Index> GetIndexAsync(CustomerRequest.Index request)
     {
+        var name = claimsPrincipal.FindFirst(ClaimTypes.Name);
+        var id = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier);
+
         var query = dbContext.Customers.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Searchterm))
