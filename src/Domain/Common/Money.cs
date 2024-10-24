@@ -11,7 +11,7 @@ public class Money : ValueObject
 
     public Money(decimal value)
     {
-        Value = value;
+        Value = Math.Round(value,2);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

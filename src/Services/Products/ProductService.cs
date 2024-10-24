@@ -1,5 +1,3 @@
-using System.Linq;
-using BogusStore.Domain.Files;
 using BogusStore.Domain.Products;
 using BogusStore.Persistence;
 using BogusStore.Services.Files;
@@ -91,19 +89,15 @@ public class ProductService : IProductService
         if (await dbContext.Products.AnyAsync(x => x.Name == model.Name))
             throw new EntityAlreadyExistsException(nameof(Product), nameof(Product.Name), model.Name);
 
-        Image image = new Image(storageService.BasePath, model.ImageContentType!);
         Money price = new(model.Price);
-        Product product = new(model.Name!, model.Description!, price, image.FileUri.ToString());
+        Product product = new(model.Name!, model.Description!, price, storageService.GenerateImageUrl().ToString());
 
         dbContext.Products.Add(product);
         await dbContext.SaveChangesAsync();
 
-        Uri uploadSas = storageService.GenerateImageUploadSas(image);
-
         ProductResult.Create result = new()
         {
             ProductId = product.Id,
-            UploadUri = uploadSas.ToString()
         };
 
         return result;

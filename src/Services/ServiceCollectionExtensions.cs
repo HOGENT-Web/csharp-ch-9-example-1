@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITagService, TagService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IOrderService, OrderService>();
-        services.AddScoped<IStorageService, BlobStorageService>();
+        services.AddScoped<IStorageService, FakeStorageService>();
 
         // Add more services here...
 

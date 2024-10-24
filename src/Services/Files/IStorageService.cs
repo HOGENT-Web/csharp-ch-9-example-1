@@ -1,9 +1,17 @@
-﻿using BogusStore.Domain.Files;
+﻿using Bogus;
 
 namespace BogusStore.Services.Files;
 
 public interface IStorageService
 {
-    Uri BasePath { get; }
-    Uri GenerateImageUploadSas(Image image);
+    Uri GenerateImageUrl();
+}
+
+public class FakeStorageService : IStorageService
+{
+    public Uri GenerateImageUrl()
+    {
+        Faker f = new Faker();
+        return new Uri(f.Image.PicsumUrl());
+    }
 }
