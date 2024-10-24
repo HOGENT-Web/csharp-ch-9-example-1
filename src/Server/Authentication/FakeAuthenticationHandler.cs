@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
@@ -12,9 +10,8 @@ public class FakeAuthenticationHandler : AuthenticationHandler<AuthenticationSch
     public FakeAuthenticationHandler(
       IOptionsMonitor<AuthenticationSchemeOptions> options,
       ILoggerFactory logger,
-      UrlEncoder encoder,
-      ISystemClock clock)
-    : base(options, logger, encoder, clock) { }
+      UrlEncoder encoder)
+    : base(options, logger, encoder) { }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
